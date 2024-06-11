@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body class="m-0 p-0">
+    <script type="x-shader/x-vertex" id="vertexshader">
+
+			varying vec2 vUv;
+
+			void main() {
+
+				vUv = uv;
+
+				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+
+			}
+
+		</script>
+
+		<script type="x-shader/x-fragment" id="fragmentshader">
+
+			uniform sampler2D baseTexture;
+			uniform sampler2D bloomTexture;
+
+			varying vec2 vUv;
+
+			void main() {
+
+				gl_FragColor = ( texture2D( baseTexture, vUv ) + vec4( 1.0 ) * texture2D( bloomTexture, vUv ) );
+
+			}
+
+		</script>
+    <script src="index.js" type="module"></script>
+    <!-- div with display flex-->
+    <div id="main_frame" class="hidden">
+      <video id="video" autoplay></video>
+    </div>
+    <div class="absolute flex flex-col h-fit top-[42%] right-[-30px]  w-72 justify-center items-center">
+          <div class="container ">
+            <!-- <input type="radio" name="slider" class="vertical-carousel" id="item-1"  checked>
+            <input type="radio" name="slider" class="vertical-carousel" id="item-2">
+            <input type="radio" name="slider" class="vertical-carousel" id="item-3"> -->
+            <input type="radio" name="slider" class="vertical-carousel" id="item-1" data-carousel="glasses-carousel" checked>
+            <input type="radio" name="slider" class="vertical-carousel" id="item-2" data-carousel="hats-carousel">
+            <input type="radio" name="slider" class="vertical-carousel" id="item-3" data-carousel="mask-carousel" >
+
+            <div class="cards ">
+              <label class="card h-44" for="item-1" id="song-1">
+                <div class="rounded-box absolute inset-0 bg-cover bg-center custom-color backdrop-blur-sm drop-shadow-xl"></div>
+                <img src="/images/icons/sun-glasses.png"  class="z-10 p-3" alt="song">
+                
+              </label>
+              <label class="card h-44" for="item-2" id="song-2">
+                <img src="/images/icons/cap.png"  class="z-10 p-3" alt="song">
+                <div class="rounded-box absolute inset-0 bg-cover bg-center custom-color backdrop-blur-sm drop-shadow-xl"></div>
+
+              </label>
+              <label class="card h-44" for="item-3" id="song-3">
+                <img src="/images/icons/mask.png"  class="z-10 p-3" alt="song">
+                <div class="rounded-box absolute inset-0 bg-cover bg-center custom-color backdrop-blur-sm drop-shadow-xl"></div>
+                
+              </label>
+          </div>
+            </div>
+        </div>
+    <div id="trash-bin" class="absolute bottom-72">
+      <img src="images/icons/remove.png" class="trash-img" alt="">
+    </div>
+    <div class="w-full absolute bottom-0 flex justify-center h-60 overflow-x-scroll">
+      <div id="hats-carousel" class="flex flex-nowrap cs overflow-y-hidden max-w-5xl p-4 h-fit space-x-12 rounded-box text-center">
+        <div id="hat-red" class="relative carousel-item rounded-box h-36 w-36 p-4  ">
+          <img src="/images/hats/hat_2.png" class="z-10 object-contain max-w-[11rem] " alt="">
+          <div class="rounded-box absolute inset-0 bg-cover bg-center custom-color backdrop-blur-sm drop-shadow-xl"></div>
+        </div>
+        <div id="hat-green" class="relative carousel-item rounded-box h-36 w-36 p-4 ">
+          <img src="/images/hats/hat_3.png" class="z-10 object-contain max-w-[11rem]" alt="">
+          <div class="rounded-box absolute inset-0 bg-cover bg-center custom-color backdrop-blur-sm drop-shadow-xl"></div>
+        </div>
+        <div id="hat-blue" class="relative carousel-item rounded-box h-36 w-36 p-4 ">
+          <img src="/images/hats/hat_4.png" class="z-10 object-contain max-w-[11rem]" alt="">
+          <div class="rounded-box absolute inset-0 bg-cover bg-center custom-color backdrop-blur-sm drop-shadow-xl"></div>
+        </div>
+        <div id="hat-yellow" class="relative carousel-item rounded-box h-36 w-36 p-4 ">
+          <img src="/images/hats/hat_5.png" class="z-10 object-contain max-w-[11rem]" alt="">
+          <div class="rounded-box absolute inset-0 bg-cover bg-center custom-color backdrop-blur-sm drop-shadow-xl"></div>
+        </div>
+        <div id="hat-magenta" class="relative carousel-item rounded-box h-36 w-36 p-4 ">
+          <img src="/images/hats/hat_0.png" class="z-10 object-contain max-w-[11rem]" alt="">
+          <div class="rounded-box absolute inset-0 bg-cover bg-center custom-color backdrop-blur-sm drop-shadow-xl"></div>
+        </div>
+      </div>
+      <div id="mask-carousel" class="flex flex-nowrap cs overflow-y-hidden cs max-w-5xl p-4 space-x-12  rounded-box text-center">
+        <div id="mask-red" class="relative carousel-item rounded-box h-36 w-36 p-4  ">
+          <img src="/images/necklace/nk-0.png" class="z-10 object-contain max-w-[11rem] " alt="">
+          <div class="rounded-box absolute inset-0 bg-cover bg-center custom-color backdrop-blur-sm drop-shadow-xl"></div>
+        </div>
+        <div id="mask-green" class="relative carousel-item rounded-box h-36 w-36 p-4 ">
+          <img src="/images/necklace/nk-2.png" class="z-10 object-contain max-w-[11rem]" alt="">
+          <div class="rounded-box absolute inset-0 bg-cover bg-center custom-color backdrop-blur-sm drop-shadow-xl"></div>
+        </div>
+        <div id="mask-blue" class="relative carousel-item rounded-box h-36 w-36 p-4 ">
+          <img src="/images/necklace/nk-3.png" class="z-10 object-contain max-w-[11rem]" alt="">
+          <div class="rounded-box absolute inset-0 bg-cover bg-center custom-color backdrop-blur-sm drop-shadow-xl"></div>
+        </div>
+        <div id="mask-yellow" class="relative carousel-item rounded-box h-36 w-36 p-4 ">
+          <img src="/images/necklace/nk-1.png" class="z-10 object-contain max-w-[11rem]" alt="">
+          <div class="rounded-box absolute inset-0 bg-cover bg-center custom-color backdrop-blur-sm drop-shadow-xl"></div>
+      </div>
+      </div>  
+      <div id="glasses-carousel" class="flex flex-nowrap cs overflow-y-hidden cs  max-w-5xl p-4 space-x-12 scrbar rounded-box text-center">
+        <div id="glasses-red" class="relative carousel-item rounded-box scrbar h-36 w-36 p-4">
+          <img src="/images/sunglasses/2.png" class="z-10 object-contain max-w-[11rem] " alt="">
+          <div class="rounded-box absolute inset-0 bg-cover bg-center custom-color backdrop-blur-sm drop-shadow-xl"></div>
+        </div>
+        <div id="glasses-green" class="relative carousel-item rounded-box h-36 w-36 p-4 ">
+          <img src="/images/sunglasses/3.png" class="z-10 object-contain max-w-[11rem]" alt="">
+          <div class="rounded-box absolute inset-0 bg-cover bg-center custom-color backdrop-blur-sm drop-shadow-xl"></div>
+        </div>
+        <div id="glasses-blue" class="relative carousel-item rounded-box h-36 w-36 p-4 ">
+          <img src="/images/sunglasses/4.png" class="z-10 object-contain max-w-[11rem]" alt="">
+          <div class="rounded-box absolute inset-0 bg-cover bg-center custom-color backdrop-blur-sm drop-shadow-xl"></div>
+        </div>
+        <div id="glasses-yellow" class="relative carousel-item rounded-box h-36 w-36 p-4 ">
+          <img src="/images/sunglasses/5.png" class="z-10 object-contain max-w-[11rem]" alt="">
+          <div class="rounded-box absolute inset-0 bg-cover bg-center custom-color backdrop-blur-sm drop-shadow-xl"></div>
+        </div>
+        <div id="glasses-purple" class="relative carousel-item rounded-box h-36 w-36 p-4 ">
+          <img src="/images/sunglasses/6.png" class="z-10 object-contain max-w-[11rem]" alt="">
+          <div class="rounded-box absolute inset-0 bg-cover bg-center custom-color backdrop-blur-sm drop-shadow-xl"></div>
+        </div>
+        <div id="glasses-white" class="relative carousel-item rounded-box h-36 w-36 p-4 ">
+          <img src="/images/sunglasses/7.png" class="z-10 object-contain max-w-[11rem]" alt="">
+          <div class="rounded-box absolute inset-0 bg-cover bg-center custom-color backdrop-blur-sm drop-shadow-xl"></div>
+        </div>
+        <div id="glasses-orange" class="relative carousel-item rounded-box h-36 w-36 p-4 ">
+          <img src="/images/sunglasses/8.png" class="z-10 object-contain max-w-[11rem]" alt="">
+          <div class="rounded-box absolute inset-0 bg-cover bg-center custom-color backdrop-blur-sm drop-shadow-xl"></div>
+        </div>
+        <div id="glasses-magenta" class="relative carousel-item rounded-box h-36 w-36 p-4 ">
+          <img src="/images/sunglasses/9.png" class="z-10 object-contain max-w-[11rem]" alt="">
+          <div class="rounded-box absolute inset-0 bg-cover bg-center custom-color backdrop-blur-sm drop-shadow-xl"></div>
+        </div>
+      </div>
+
+
+      </div>
+
+      <div id="heart" class="instagram-heart">
+      </div>
+
+      <div id="tutorial" class="h-28 absolute top-8 right-8 opacity-70">
+        <img src="images/icons/info.png" class="object-contain h-28">
+      </div>
+
+      <div id="tutorial-card" class="h-[92%] w-[87%] bg-white absolute z-10 m-16 rounded-3xl drop-shadow-xl hidden transition-all">
+        <img src="images/tutorial.gif" class="object-contain w-full h-[90%]" alt="">
+        <div class="flex flex-nowrap items-center justify-center text-4xl text-black bottom w-full h-[9%]">
+          <p class="font-bold font-mono">THUMBS-UP TO EXIT</p>
+          <img src="images/icons/thumbup.png" class="object-contain max-w-[18%]">
+        </div>
+      </div>
+
+        
+  </body>
+
+</html>

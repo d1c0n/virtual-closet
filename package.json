@@ -1,0 +1,23 @@
+{
+  "name": "your-project",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index_threejs.js"
+  },
+  "dependencies": {
+    "@mediapipe/face_mesh": "^0.4.1633559619",
+    "@mediapipe/hands": "^0.4.1675469240",
+    "@mediapipe/tasks-vision": "^0.10.2-rc2",
+    "three": "^0.153.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "daisyui": "^3.1.7",
+    "postcss": "^8.4.24",
+    "tailwindcss": "^3.3.2",
+    "vite": "^4.3.9"
+  }
+}
